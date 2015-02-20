@@ -1,0 +1,6 @@
+ofxOsc
+ofxXmlSettings
+ofxDspChain
+ofxMaxim
+ofxUI
+ofxPlaymodes
