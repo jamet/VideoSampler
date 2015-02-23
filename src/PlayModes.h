@@ -1,6 +1,6 @@
 //
 //  PlayModes.h
-//  
+//
 //
 //  Created by Joshua Batty on 5/05/14.
 //
@@ -18,23 +18,24 @@
 #include "VideoMixerGPU.h"
 
 
-#define NUM_FRAMES 400
+#define NUM_FRAMES 515
 
 class PlayModes{
-    
+
 public:
     void setup();
     void update();
     void draw();
     void drawData();
-    
+
     void recordingStatus();
-    
+
     void setFps(int _fps);
     void setDelay(float _delay);
     void setSpeed(float _speed);
 
     ofxPm::VideoGrabber vGrabber;
+    //ofVideoGrabber vGrabber;
     ofxPm::VideoBuffer vBuffer;
     ofxPm::VideoHeader vHeader;
     ofxPm::BasicVideoRenderer vRenderer;
@@ -46,7 +47,7 @@ public:
 
     bool bRecord;
     bool bRecordSwitch;
-    
+
     float framePosPerc;
 
 };

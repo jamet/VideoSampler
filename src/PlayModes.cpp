@@ -1,6 +1,6 @@
 //
 //  PlayModes.cpp
-// 
+//
 //
 //  Created by Joshua Batty on 5/05/14.
 //
@@ -13,15 +13,15 @@ using namespace ofxPm;
 void PlayModes::setup(){
 
     framePosPerc = 0.0f;
-    
+
     bRecord = true;
     bRecordSwitch = true;
-    
+
     fps = 60;
     delay = 1000;
-    
-	vGrabber.initGrabber(640,480);
 
+	vGrabber.initGrabber(640,480);
+    vGrabber.setVerbose(true);
 	vRate.setup(vGrabber,fps);
 	vBuffer.setup(vRate,NUM_FRAMES,true);
 	vHeader.setup(vBuffer);
@@ -33,7 +33,7 @@ void PlayModes::setup(){
 	vRate.setup(vMixer,fps);
 	vBuffer.setup(vRate,NUM_FRAMES,false);
 	vHeader.setDelayMs(1000);
-    
+
 	vRenderer.setup(vMixer);
  */
 }
@@ -75,41 +75,43 @@ void PlayModes::update(){
 //	vRate.setFps(fps);
 //	vHeader.setFps(fps);
 //	vHeader.setDelayMs(delay);
- 
+
 }
 
 //--------------------------------------------------------------
 void PlayModes::draw(){
-    
+
+    //vGrabber.draw(320,240);
+
 	vBuffer.draw();
 	vHeader.draw();
-    
-	vRenderer.draw(0,0,ofGetWidth(),ofGetHeight());
-    
+
+	vRenderer.draw(0,0,640,480);
+
 	//gui.draw();
 	ofDrawBitmapString("FPS: " + ofToString(int(ofGetFrameRate()))
                        + " || cameraBuffer FPS " + ofToString(vBuffer.getRealFPS())
                        + " || videoframes pool size: " + ofToString(VideoFrame::getPoolSize(VideoFormat(640,480,3)))
                        + " || total frames: " +ofToString(VideoFrame::getTotalNumFrames()),20,ofGetHeight()-40);
-    
+
 }
 
 //--------------------------------------------------------------
 void PlayModes::drawData(){
     float vhPos = ofMap(vHeader.getDelayFrames(),0,NUM_FRAMES,0.0,1.0);
 
-    
+
     const float waveformWidth  = ofGetWidth() - 40;
     const float waveformHeight = 300;
-    
+
     float top = ofGetHeight() - waveformHeight - 20;
     float left = 20;
-    
+
     ////////// Video Header Play Pos ///////////////////////
     ofSetColor(255,0,0);
     ofDrawBitmapString("Video Header Play Pos", left, top-10);
   //  ofLine(left, top, waveformWidth, top);
-    
+
     // frame pos
     ofSetColor(0,0,255);
     framePosPerc = (float)vBuffer.getFramePos() / (float)NUM_FRAMES;

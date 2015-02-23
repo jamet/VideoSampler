@@ -22,7 +22,10 @@ void ofApp::setup(){
     gui->addToggle("Record Input", true);
     //gui->addToggle("Set Position", &avgs.grainPlayer.bSetPosition);
     gui->addSlider("Position", 0.0, 1.0, 1.0);
- //   gui->addSlider("Loop Size", 0.0 ,1.0, 0.0);
+    gui->addSlider("Play Start", 0.0, 0.0, 1.0);
+    gui->addSlider("Play End", 0.0, 0.0, 1.0);
+    gui->addToggle("Play Buffer", true);
+ //   gui->addSlider("Loop ESize", 0.0 ,1.0, 0.0);
     //gui->addSlider("Volume", 0.0, 1.0, &avgs.grainPlayer.volume);
 
 
@@ -54,6 +57,19 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 
         VS.playModes.setDelay(slider->getScaledValue());
 	}
+	else  if(name == "Play Start")
+	{
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+
+        VS.playStart = slider->getScaledValue();
+
+	}
+	else  if(name == "Play End")
+	{
+		ofxUISlider *slider = (ofxUISlider *) e.widget;
+
+        VS.playEnd = slider->getScaledValue();
+	}
    /* else if(name == "Loop Size")
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
@@ -66,6 +82,16 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
             VS.playModes.bRecord = true;
         } else {
             VS.playModes.bRecord = false;
+        }
+    }
+    else if(name == "Play Buffer"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+       // avgs.grainPlayer.bRecLiveInput = toggle->getValue();
+        if(toggle->getValue()==true){
+            VS.bPlayBuffer = true;
+        } else {
+
+            VS.bPlayBuffer=false;
         }
     }
 }
