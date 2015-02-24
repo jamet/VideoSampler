@@ -11,7 +11,7 @@ void ofApp::setup(){
     //GUI
     gui = new ofxUICanvas();
     gui->addLabel("Video Sampler");
-    gui->setFont("GUI/Fett.ttf");
+   //    gui->setFont("GUI/Fett.ttf");
     gui->addSpacer();
 
     /*gui->addSlider("Speed", -1.2, 1.8, &avgs.grainPlayer.speed);
@@ -19,7 +19,7 @@ void ofApp::setup(){
     gui->addSlider("GrainSize", 0.025, 0.45, &avgs.grainPlayer.grainSize);
     gui->addSlider("Overlaps", 1, 5, &avgs.grainPlayer.overlaps);
     gui->addSpacer();*/
-    gui->addToggle("Record Input", true);
+    gui->addToggle("Record Input", false);
     //gui->addToggle("Set Position", &avgs.grainPlayer.bSetPosition);
     gui->addSlider("Position", 0.0, 1.0, 1.0);
     gui->addSlider("Play Start", 0.0, 1.0, 0.0);
@@ -40,6 +40,9 @@ void ofApp::update(){
     ofSetWindowTitle(ofToString(ofGetFrameRate()));
 
     VS.update();
+
+    //update gui
+
 }
 
 //--------------------------------------------------------------
@@ -80,8 +83,11 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
        // avgs.grainPlayer.bRecLiveInput = toggle->getValue();
         if(toggle->getValue()==true){
             VS.playModes.bRecord = true;
+            VS.bRecLiveInput = true;
         } else {
             VS.playModes.bRecord = false;
+            VS.bRecLiveInput = false;
+
         }
     }
     else if(name == "Play Buffer"){

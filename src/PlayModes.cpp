@@ -61,7 +61,7 @@ void PlayModes::recordingStatus(){
         bRecordSwitch = false;
     } else if(bRecord==false){
         if(bRecordSwitch==false){
-            vBuffer.stop();
+            //vBuffer.stop();
         }
         bRecordSwitch = true;
     }

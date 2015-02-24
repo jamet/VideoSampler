@@ -12,6 +12,14 @@ void VideoSampler::draw(){
     cout<<"draw"<<endl;
         playModes.draw();
         playModes.drawData();
+                if (playModes.vBuffer.getNextVideoFrame()!= NULL){
+                    playModes.vBuffer.getNextVideoFrame().getTextureRef().draw(640 , 480, 960, 720);
+                }else cout<<"nulllllllllllllllllllllllllllll"<<endl;
+
+                cout<<"setframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;
+                playModes.vBuffer.iterFramePos();
+                cout<<"iterframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;
+
 
  /*       // draw a playhead over the waveform
     ofSetColor(ofColor::white);
@@ -32,29 +40,45 @@ void VideoSampler::draw(){
 
 void VideoSampler::update(){
         cout<<"update"<<endl;
-
-        playModes.update();
+        //playHead=playStart;
+cout<<"record position++"<<recordPosition<<" framepos "<<playModes.vBuffer.framePos<<endl;
+        //playModes.update();
         if (bRecLiveInput){
             playModes.vBuffer.setFramePos(getRecordPostion()/100);
+            playHead=playStart;
             //increment recordPosition
             if (recordPosition<100){
                 //playEnd=recordPosition/100;
                 recordPosition++;
+                cout<<"record position++"<<recordPosition<<" framepos "<<playModes.vBuffer.framePos<<endl;
+
 
             }else {
 
                 recordPosition=0;
-                playHead=playStart;
+                //playHead=playStart;
                 bRecLiveInput=false;
                 bPlayBuffer=true;
+                playModes.vBuffer.setFramePos(playHead);
+
             }
 
         }else
         {
+
             playModes.vBuffer.stop();
+            playModes.vBuffer.setFramePos(playHead);
             //playModes.vBuffer.draw();
             if (bPlayBuffer){
-                playModes.vBuffer.setFramePos(playHead);
+                //playModes.vBuffer.setFramePos(playHead);
+              /*  if (playModes.vBuffer.getNextVideoFrame()!= NULL){
+                    playModes.vBuffer.getNextVideoFrame().getTextureRef().draw(640 , 480, 960, 720);
+                }else cout<<"nulllllllllllllllllllllllllllll"<<endl;
+
+                cout<<"setframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;
+                playModes.vBuffer.iterFramePos();
+                cout<<"iterframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;*/
+
                 updatePlayHead();
             }
 
@@ -64,7 +88,7 @@ void VideoSampler::update(){
     playModes.setSpeed(speed);
 
 
-
+    playModes.update();
 
    /* if(bRecLiveInput==false){
         if(!grainPlayer.bSetPosition==true){
@@ -89,12 +113,18 @@ void VideoSampler::updatePlayHead(){
     if (playHead<playEnd){
 
         playHead+=0.01;
+        cout<<"playhead++"<<playHead<<endl;
         //playModes.vBuffer.iterFramePos();
         //playModes.vRenderer.
     }else {
         playHead=playStart;
+        //playModes.vBuffer.setFramePos(playHead);
+
         bRecLiveInput=false;
     }
+
+    playModes.vBuffer.setFramePos(playHead);
+
     if(ofGetFrameNum()==100){
         speed = 1.0;
     }
