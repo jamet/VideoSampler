@@ -3,7 +3,7 @@
 void VideoSampler::setup(){
         bufferSize=512;
         playStart=0;
-        playEnd=0;
+        playEnd=1.0;
         playModes.setup();
 
 }
@@ -36,6 +36,19 @@ void VideoSampler::update(){
         playModes.update();
         if (bRecLiveInput){
             playModes.vBuffer.setFramePos(getRecordPostion()/100);
+            //increment recordPosition
+            if (recordPosition<100){
+                //playEnd=recordPosition/100;
+                recordPosition++;
+
+            }else {
+
+                recordPosition=0;
+                playHead=playStart;
+                bRecLiveInput=false;
+                bPlayBuffer=true;
+            }
+
         }else
         {
             playModes.vBuffer.stop();
@@ -50,15 +63,7 @@ void VideoSampler::update(){
     cout<<"record position"<<getRecordPostion()<<endl;
     playModes.setSpeed(speed);
 
-    //increment recordPosition
-    if (recordPosition<100){
-        recordPosition++;
-    }else {
-        recordPosition=0;
-        playHead=0;
-        bRecLiveInput=false;
-        bPlayBuffer=true;
-    }
+
 
 
    /* if(bRecLiveInput==false){

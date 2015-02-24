@@ -22,9 +22,9 @@ void ofApp::setup(){
     gui->addToggle("Record Input", true);
     //gui->addToggle("Set Position", &avgs.grainPlayer.bSetPosition);
     gui->addSlider("Position", 0.0, 1.0, 1.0);
-    gui->addSlider("Play Start", 0.0, 0.0, 1.0);
-    gui->addSlider("Play End", 0.0, 0.0, 1.0);
-    gui->addToggle("Play Buffer", true);
+    gui->addSlider("Play Start", 0.0, 1.0, 0.0);
+    gui->addSlider("Play End", 0.0, 1.0, 1.0);
+    gui->addToggle("Play Buffer", false);
  //   gui->addSlider("Loop ESize", 0.0 ,1.0, 0.0);
     //gui->addSlider("Volume", 0.0, 1.0, &avgs.grainPlayer.volume);
 
