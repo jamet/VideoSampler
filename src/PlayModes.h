@@ -27,6 +27,7 @@ public:
     void update();
     void draw();
     void drawData();
+    void drawPlayerData(float _playhead);
 
     void recordingStatus();
 

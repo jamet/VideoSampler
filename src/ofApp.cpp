@@ -4,7 +4,7 @@
 void ofApp::setup(){
      ofSetVerticalSync(true);
 	ofEnableAlphaBlending();
-    ofSetFrameRate(60);
+    ofSetFrameRate(30);
 
     VS.setup();
 

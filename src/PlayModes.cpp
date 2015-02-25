@@ -17,7 +17,7 @@ void PlayModes::setup(){
     bRecord = true;
     bRecordSwitch = true;
 
-    fps = 60;
+    fps = 30;
     delay = 1000;
 
 	vGrabber.initGrabber(640,480);
@@ -119,5 +119,38 @@ void PlayModes::drawData(){
     ofDrawBitmapString("FramePos", left + framePosPerc * waveformWidth-76, top+45);
 
     ofCircle(left+(framePosPerc*(waveformWidth-left)), top, 10);
+
 }
 
+
+void PlayModes::drawPlayerData(float _playhead){
+    float vhPos = ofMap(vHeader.getDelayFrames(),0,NUM_FRAMES,0.0,1.0);
+
+
+    const float waveformWidth  = ofGetWidth() - 40;
+    const float waveformHeight = 300;
+
+    float top = ofGetHeight() - waveformHeight - 20;
+    float left = 20;
+
+    ////////// Video Header Play Pos ///////////////////////
+    ofSetColor(255,0,0);
+    ofDrawBitmapString("Video Header Play Pos", left, top-10);
+  //  ofLine(left, top, waveformWidth, top);
+
+    // frame pos
+    ofSetColor(0,0,255);
+    framePosPerc = (float)vBuffer.getFramePos() / (float)NUM_FRAMES;
+    ofLine(left+ (framePosPerc * (waveformWidth-left)), top, left+ (framePosPerc * (waveformWidth-left)), top+waveformHeight);
+    ofDrawBitmapString("FramePos", left + framePosPerc * waveformWidth-76, top+45);
+
+    ofCircle(left+(framePosPerc*(waveformWidth-left)), top, 10);
+
+    // player frame pos
+    ofSetColor(0,255,255);
+    framePosPerc = _playhead ;
+    ofLine(left+ (framePosPerc * (waveformWidth-left)), top, left+ (framePosPerc * (waveformWidth-left)), top+waveformHeight);
+    ofDrawBitmapString("PlayheadPos", left + framePosPerc * waveformWidth-76, top+45);
+
+    ofCircle(left+(framePosPerc*(waveformWidth-left)), top, 10);
+}
