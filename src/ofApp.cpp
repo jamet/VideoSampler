@@ -89,6 +89,8 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
         if(toggle->getValue()==true){
             VS.playModes.bRecord = true;
             VS.bRecLiveInput = true;
+            //VS.playModes.vBuffer.setFramePos((float)0);
+            VS.playModes.vBuffer.clear();
         } else {
             VS.playModes.bRecord = false;
             VS.bRecLiveInput = false;

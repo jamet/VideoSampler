@@ -9,42 +9,33 @@ void VideoSampler::setup(){
 }
 
 void VideoSampler::draw(){
-    cout<<"draw"<<endl;
-        playModes.draw();
-        playModes.drawPlayerData(playHead);
+    playModes.draw();
+    playModes.drawPlayerData(playHead);
 
         //draw player videoframe
-        if (playModes.vBuffer.getVideoFrame(playHead)!= NULL){
+    if (playModes.vBuffer.getVideoFrame(playHead)!= NULL){
 
-            ofSetColor(255,255,255);
+        ofSetColor(255,255,255);
 
-            playModes.vBuffer.getVideoFrame(playHead).getTextureRef().draw(640 , 0, 320, 240);
-
-
+        playModes.vBuffer.getVideoFrame(playHead).getTextureRef().draw(640 , 0, 320, 240);
                     cout<<"timestamp "<<playModes.vBuffer.getVideoFrame(playHead).getTimestamp().epochMicroseconds()<<endl;
 
-        }
-
-                cout<<"setframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;
-                //playModes.vBuffer.iterFramePos();
-                cout<<"iterframepos"<<playHead<<" framepos "<<playModes.vBuffer.framePos<<endl;
-
+    }
 
 }
 
 
 void VideoSampler::update(){
-
-
-        if (bRecLiveInput){
-            playModes.vBuffer.resume();
-            playModes.vBuffer.setFramePos(getRecordPostion()/100);
+    if (bRecLiveInput){
+        //playModes.vBuffer.clear();
+        playModes.vBuffer.resume();
+        playModes.vBuffer.setFramePos(getRecordPostion()/100);
 
             //increment recordPosition
-            if (recordPosition<100){
+        if (recordPosition<100){
 
                 recordPosition++;
-                //cout<<"record position++"<<recordPosition<<" framepos "<<playModes.vBuffer.framePos<<endl;
+                cout<<"record position++"<<recordPosition<<" framepos "<<playModes.vBuffer.framePos<<endl;
 
 
             }else {
@@ -57,18 +48,18 @@ void VideoSampler::update(){
 
             }
 
-        }
-        else{
+    }
+    else{
 
-            playModes.vBuffer.stop();
+        playModes.vBuffer.stop();
 
-            if (bPlayBuffer){
+        if (bPlayBuffer){
 
                 updatePlayHead();
 
             }
 
-        }
+    }
 
     //playModes.setSpeed(speed);
     playModes.update();
