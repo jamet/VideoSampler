@@ -42,7 +42,11 @@ void ofApp::update(){
     VS.update();
 
     //update gui
+    ofxUILabelToggle *Play = (ofxUILabelToggle*)gui->getWidget("Play Buffer");
+    Play->setValue(VS.bPlayBuffer);
 
+    ofxUILabelToggle *Rec = (ofxUILabelToggle*)gui->getWidget("Record Input");
+    Rec->setValue(VS.bRecLiveInput);
 }
 
 //--------------------------------------------------------------
@@ -65,6 +69,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 
         VS.playStart = slider->getScaledValue();
+
 
 	}
 	else  if(name == "Play End")
