@@ -1,8 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "PlayModes.h"
+//#include "PlayModes.h"
+#include "VideoBuffer.h"
+#include "VideoGrabber.h"
+#include "VideoRate.h"
 
+#define NUM_FRAMES 515
 
 
 class VideoSampler : public ofBaseApp{
@@ -12,11 +16,17 @@ public:
     void update();
     void draw();
 
-    //void updatePlayHead();
+
     float getRecordPostion();
+    void drawPlayerData(float _playhead);
+    //PlayModes playModes;
+    // Grabber and Buffer
+    ofxPm::VideoGrabber vGrabber;
+    //ofVideoGrabber vGrabber;
+    ofxPm::VideoBuffer vBuffer;
+    ofxPm::VideoRate vRate;
 
-    PlayModes playModes;
-
+    int fps;
 	float speed;
 	float playHead;
 	float loopSize;

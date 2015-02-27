@@ -62,7 +62,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 
-        VS.playModes.setDelay(slider->getScaledValue());
+        //VS.setDelay(slider->getScaledValue());
 	}
 	else  if(name == "Play Start")
 	{
@@ -87,12 +87,12 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
        // avgs.grainPlayer.bRecLiveInput = toggle->getValue();
         if(toggle->getValue()==true){
-            VS.playModes.bRecord = true;
+            //VS.playModes.bRecord = true;
             VS.bRecLiveInput = true;
             //VS.playModes.vBuffer.setFramePos((float)0);
-            VS.playModes.vBuffer.clear();
+            VS.vBuffer.clear();
         } else {
-            VS.playModes.bRecord = false;
+            //VS.playModes.bRecord = false;
             VS.bRecLiveInput = false;
 
         }
