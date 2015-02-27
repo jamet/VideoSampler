@@ -17,8 +17,6 @@ void VideoSampler::setup(){
 }
 
 void VideoSampler::draw(){
-    //playModes.draw();
-    //playModes.drawPlayerData(playHead);
 
         ofSetColor(255,255,255);
 
@@ -30,10 +28,10 @@ void VideoSampler::draw(){
     if ((vBuffer.getVideoFrame(playHead)!= NULL)&&(bPlayBuffer)){
 
         vBuffer.getVideoFrame((int)playHead).getTextureRef().draw(640 , 0, 320, 240);
-                    cout<<"timestamp "<<vBuffer.getVideoFrame((int)playHead).getTimestamp().epochMicroseconds()<<endl;
 
     }
 
+        //draw head position
     ofDrawBitmapString("FPS: " + ofToString(int(ofGetFrameRate()))
                        + " || cameraBuffer FPS " + ofToString(vBuffer.getRealFPS())
                        //+ " || videoframes pool size: " + ofToString(VideoFrame::getPoolSize(VideoFormat(640,480,3)))
@@ -49,30 +47,22 @@ void VideoSampler::update(){
     vGrabber.update();
 
     if (bRecLiveInput){
-        //playModes.vBuffer.clear();
+
         vBuffer.resume();
-        cout<<"buffer resume"<<endl;
         vBuffer.setFramePos((int)recordPosition);
-        cout<<"setframepos "<<recordPosition<<endl;
 
             //increment recordPosition
         if (recordPosition<NUM_FRAMES-1){
-                //vBuffer.setFramePos((int)recordPosition);
+
                 recordPosition++;
-                cout<<"record position++"<<recordPosition<<"playhead "<<playHead<<" framepos "<<vBuffer.framePos<<endl;
 
+        }else {
 
-
-            }else {
-
-                //recordPosition=0;
-                //playHead=playStart;
                 bRecLiveInput=false;
                 bPlayBuffer=true;
                 recordPosition=0;
-                //vBuffer.setFramePos(playHead);
 
-            }
+        }
 
     }
     else{
@@ -83,7 +73,7 @@ void VideoSampler::update(){
 
                 updatePlayHead();
 
-            }
+        }
 
     }
 
@@ -110,9 +100,6 @@ void VideoSampler::updatePlayHead(){
         speed = 1.0;
     }
 
-
-
-    cout<<"playhead updated==========================="<<playHead<<"buffer framepos"<<vBuffer.getFramePos()<<endl;
 }
 
 float VideoSampler::getRecordPostion(){
@@ -134,7 +121,7 @@ void VideoSampler::drawPlayerData(float _playheadPerc){
     ////////// Video Header Play Pos ///////////////////////
     ofSetColor(255,0,0);
     ofDrawBitmapString("Video Header Play Pos", left, top-10);
-  //  ofLine(left, top, waveformWidth, top);
+    ofLine(left, top, waveformWidth, top);
 
     // frame pos
     ofSetColor(0,0,255);

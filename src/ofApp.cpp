@@ -62,7 +62,9 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 
-        //VS.setDelay(slider->getScaledValue());
+        VS.vBuffer.setFramePos(slider->getScaledValue());
+      //  VS.recordPosition = (int)(slider->getScaledValue()/NUM_FRAMES);
+      //  cout<<VS.recordPosition<<endl;
 	}
 	else  if(name == "Play Start")
 	{
@@ -78,32 +80,24 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 
         VS.playEnd = slider->getScaledValue();
 	}
-   /* else if(name == "Loop Size")
-	{
-		ofxUISlider *slider = (ofxUISlider *) e.widget;
-		avgs.grainPlayer.loopSize = slider->getScaledValue();
-	}*/
+
     else if(name == "Record Input"){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-       // avgs.grainPlayer.bRecLiveInput = toggle->getValue();
         if(toggle->getValue()==true){
-            //VS.playModes.bRecord = true;
             VS.bRecLiveInput = true;
             //VS.playModes.vBuffer.setFramePos((float)0);
-            VS.vBuffer.clear();
+            //VS.vBuffer.clear();
         } else {
-            //VS.playModes.bRecord = false;
+
             VS.bRecLiveInput = false;
 
         }
     }
     else if(name == "Play Buffer"){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
-       // avgs.grainPlayer.bRecLiveInput = toggle->getValue();
         if(toggle->getValue()==true){
             VS.bPlayBuffer = true;
         } else {
-
             VS.bPlayBuffer=false;
         }
     }
