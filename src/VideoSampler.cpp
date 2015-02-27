@@ -20,17 +20,19 @@ void VideoSampler::draw(){
     //playModes.draw();
     //playModes.drawPlayerData(playHead);
 
+        ofSetColor(255,255,255);
+
+        //draw grabber
+        vGrabber.getNextVideoFrame().getTextureRef().draw(320,0,320,240);
+
         //draw player videoframe
 
     if ((vBuffer.getVideoFrame(playHead)!= NULL)&&(bPlayBuffer)){
 
-        ofSetColor(255,255,255);
-
         vBuffer.getVideoFrame((int)playHead).getTextureRef().draw(640 , 0, 320, 240);
                     cout<<"timestamp "<<vBuffer.getVideoFrame((int)playHead).getTimestamp().epochMicroseconds()<<endl;
 
-    }cout<<"null"<<endl;
-
+    }
 
     ofDrawBitmapString("FPS: " + ofToString(int(ofGetFrameRate()))
                        + " || cameraBuffer FPS " + ofToString(vBuffer.getRealFPS())
@@ -124,7 +126,8 @@ void VideoSampler::drawPlayerData(float _playheadPerc){
     const float waveformWidth  = ofGetWidth() - 40;
     const float waveformHeight = 300;
 
-    float top = ofGetHeight() - waveformHeight - 20;
+    //float top = ofGetHeight() - waveformHeight - 20;
+    float top = 500;
     float left = 20;
     float framePosPerc;
 
