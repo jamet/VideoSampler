@@ -14,20 +14,16 @@ void ofApp::setup(){
    //    gui->setFont("GUI/Fett.ttf");
     gui->addSpacer();
 
-    /*gui->addSlider("Speed", -1.2, 1.8, &avgs.grainPlayer.speed);
-    gui->addSlider("Pitch", 0.0, 10.0, &avgs.grainPlayer.pitch);
-    gui->addSlider("GrainSize", 0.025, 0.45, &avgs.grainPlayer.grainSize);
-    gui->addSlider("Overlaps", 1, 5, &avgs.grainPlayer.overlaps);
-    gui->addSpacer();*/
+
     gui->addToggle("Record Input", false);
     //gui->addToggle("Set Position", &avgs.grainPlayer.bSetPosition);
     gui->addSlider("Position", 0.0, 1.0, 1.0);
+    gui->addSpacer();
     gui->addSlider("Play Start", 0.0, 1.0, 0.0);
     gui->addSlider("Play End", 0.0, 1.0, 1.0);
     gui->addToggle("Play Buffer", false);
+    gui->addToggle("Pause Buffer", false);
  //   gui->addSlider("Loop ESize", 0.0 ,1.0, 0.0);
-    //gui->addSlider("Volume", 0.0, 1.0, &avgs.grainPlayer.volume);
-
 
     gui->autoSizeToFitWidgets();
 
@@ -99,6 +95,14 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
             VS.bPlayBuffer = true;
         } else {
             VS.bPlayBuffer=false;
+        }
+    }
+    else if(name == "Pause Buffer"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        if(toggle->getValue()==true){
+            VS.bPauseBuffer = true;
+        } else {
+            VS.bPauseBuffer=false;
         }
     }
 }

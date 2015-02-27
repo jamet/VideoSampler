@@ -4,6 +4,7 @@ void VideoSampler::setup(){
         bufferSize=512;
         playStart=0;
         playEnd=1.0;
+        bPauseBuffer=false;
         fps=30;
 
         //setup grabber
@@ -84,15 +85,17 @@ void VideoSampler::update(){
 
 void VideoSampler::updatePlayHead(){
 
-    if (playHead/NUM_FRAMES<playEnd){
+    if (!bPauseBuffer){
+        if (playHead/NUM_FRAMES<playEnd){
 
-        playHead++;
+            playHead++;
 
-    }else {
+        }else {
 
-        playHead=playStart*NUM_FRAMES;
+            playHead=playStart*NUM_FRAMES;
 
-        bRecLiveInput=false;
+            bRecLiveInput=false;
+        }
     }
 
 

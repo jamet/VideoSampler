@@ -42,6 +42,7 @@ public:
 
     //Playing
     bool bPlayBuffer;
+    bool bPauseBuffer;
     float playStart;
     float playEnd;
     int bufferSize;
