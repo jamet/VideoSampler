@@ -23,7 +23,7 @@ public:
     // Grabber and Buffer
     ofxPm::VideoGrabber vGrabber;
     //ofVideoGrabber vGrabber;
-    ofxPm::VideoBuffer vBuffer;
+    vector <ofxPm::VideoBuffer> vBuffer;
     ofxPm::VideoRate vRate;
 
     int fps;
@@ -34,6 +34,8 @@ public:
     void updatePlayHead();
     bool bUpdatePlayheadEvent;
 
+    int NumBuffer=4;
+    int currentBufferNum=0;
     //Recording
     bool bSetPosition;
     bool bRecLiveInput;
