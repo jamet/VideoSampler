@@ -6,7 +6,8 @@
 #include "VideoGrabber.h"
 #include "VideoRate.h"
 
-#define NUM_FRAMES 515
+#define NUM_FRAMES 300
+#define NUM_BUFFER 4
 
 
 class VideoSampler : public ofBaseApp{
@@ -23,7 +24,7 @@ public:
     // Grabber and Buffer
     ofxPm::VideoGrabber vGrabber;
     //ofVideoGrabber vGrabber;
-    vector <ofxPm::VideoBuffer*> vBuffer;
+    vector <ofxPm::VideoBuffer*> vBuffer ;
     ofxPm::VideoRate vRate;
 
     int fps;
@@ -43,7 +44,8 @@ public:
     float recordPosition;
 
     //Playing
-    bool bPlayBuffer;
+    vector <bool> bPlayBuffer;// (NUM_BUFFER);
+    bool bPlayAnyBuffer;    //increment playhead regerdless of current buffer
     bool bPauseBuffer;
     float playStart;
     float playEnd;

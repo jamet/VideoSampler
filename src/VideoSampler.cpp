@@ -15,12 +15,9 @@ void VideoSampler::setup(){
         vRate.setup(vGrabber,fps);
         for (int i=0;i<NumBuffer; i++){
 
-            /*ofxPm::VideoBuffer *sample = new ofxPm::VideoBuffer();
-            sample->setup(vRate,NUM_FRAMES,true);
-            vBuffer.push_back(*sample);*/
             vBuffer.push_back(new ofxPm::VideoBuffer(vRate,NUM_FRAMES));
-           //vBuffer[i]= *sample;
-           //vBuffer.emplace_back(vRate,NUM_FRAMES);
+            bPlayBuffer.push_back(false);
+
         }
 
 }
@@ -34,7 +31,7 @@ void VideoSampler::draw(){
 
         //draw player videoframe
     for (int i; i<vBuffer.size();i++){
-    if ((vBuffer[i]->getVideoFrame(playHead)!= NULL)&&(bPlayBuffer)){
+    if ((vBuffer[i]->getVideoFrame(playHead)!= NULL)&&(bPlayBuffer[i])){
 
         vBuffer[i]->getVideoFrame((int)playHead).getTextureRef().draw(640 , 160*i, 160, 120);
 
@@ -69,7 +66,8 @@ void VideoSampler::update(){
         }else {
 
                 bRecLiveInput=false;
-                bPlayBuffer=true;
+                bPlayAnyBuffer=true;
+                bPlayBuffer[currentBufferNum]=true;
                 recordPosition=0;
 
         }
@@ -79,7 +77,7 @@ void VideoSampler::update(){
 
         vBuffer[currentBufferNum]->stop();
 
-        if (bPlayBuffer){
+        if (bPlayAnyBuffer){
 
                 updatePlayHead();
 

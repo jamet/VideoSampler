@@ -24,6 +24,12 @@ void ofApp::setup(){
     gui->addSlider("Play End", 0.0, 1.0, 1.0);
     gui->addToggle("Play Buffer", false);
     gui->addToggle("Pause Buffer", false);
+    gui->addSpacer();
+    gui->addToggle("Buffer 0", false);
+    gui->addToggle("Buffer 1", false);
+    gui->addToggle("Buffer 2", false);
+    gui->addToggle("Buffer 3", false);
+
  //   gui->addSlider("Loop ESize", 0.0 ,1.0, 0.0);
 
     gui->autoSizeToFitWidgets();
@@ -40,10 +46,23 @@ void ofApp::update(){
 
     //update gui
     ofxUILabelToggle *Play = (ofxUILabelToggle*)gui->getWidget("Play Buffer");
-    Play->setValue(VS.bPlayBuffer);
+    Play->setValue(VS.bPlayAnyBuffer);
 
     ofxUILabelToggle *Rec = (ofxUILabelToggle*)gui->getWidget("Record Input");
     Rec->setValue(VS.bRecLiveInput);
+
+        //update playbuffer <numbuffer> toggle
+    ofxUILabelToggle *buff0 = (ofxUILabelToggle*)gui->getWidget("Buffer 0");
+    buff0->setValue(VS.bPlayBuffer[0]);
+
+    ofxUILabelToggle *buff1 = (ofxUILabelToggle*)gui->getWidget("Buffer 1");
+    buff1->setValue(VS.bPlayBuffer[1]);
+
+    ofxUILabelToggle *buff2 = (ofxUILabelToggle*)gui->getWidget("Buffer 2");
+    buff2->setValue(VS.bPlayBuffer[2]);
+
+    ofxUILabelToggle *buff3 = (ofxUILabelToggle*)gui->getWidget("Buffer 3");
+    buff3->setValue(VS.bPlayBuffer[3]);
 }
 
 //--------------------------------------------------------------
@@ -99,9 +118,9 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
     else if(name == "Play Buffer"){
         ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
         if(toggle->getValue()==true){
-            VS.bPlayBuffer = true;
+            VS.bPlayAnyBuffer = true;
         } else {
-            VS.bPlayBuffer=false;
+            VS.bPlayAnyBuffer=false;
         }
     }
     else if(name == "Pause Buffer"){
@@ -110,6 +129,38 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
             VS.bPauseBuffer = true;
         } else {
             VS.bPauseBuffer=false;
+        }
+    }
+    else if(name == "Buffer 0"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        if(toggle->getValue()==true){
+            VS.bPlayBuffer[0] = true;
+        } else {
+            VS.bPlayBuffer[0]=false;
+        }
+    }
+    else if(name == "Buffer 1"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        if(toggle->getValue()==true){
+            VS.bPlayBuffer[1] = true;
+        } else {
+            VS.bPlayBuffer[1]=false;
+        }
+    }
+    else if(name == "Buffer 2"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        if(toggle->getValue()==true){
+            VS.bPlayBuffer[2] = true;
+        } else {
+            VS.bPlayBuffer[2]=false;
+        }
+    }
+    else if(name == "Buffer 3"){
+        ofxUIToggle *toggle = (ofxUIToggle *) e.widget;
+        if(toggle->getValue()==true){
+            VS.bPlayBuffer[3] = true;
+        } else {
+            VS.bPlayBuffer[3]=false;
         }
     }
 }
