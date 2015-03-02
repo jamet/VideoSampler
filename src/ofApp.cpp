@@ -19,7 +19,7 @@ void ofApp::setup(){
     //gui->addToggle("Set Position", &avgs.grainPlayer.bSetPosition);
     gui->addSlider("Position", 0.0, 1.0, 1.0);
     gui->addSpacer();
-    gui->addSlider("Current Buffer",0, 4, 0);
+    gui->addSlider("Current Buffer", 0.0, 4.0, 0.0);
     gui->addSlider("Play Start", 0.0, 1.0, 0.0);
     gui->addSlider("Play End", 0.0, 1.0, 1.0);
     gui->addToggle("Play Buffer", false);
@@ -59,7 +59,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e){
 	{
 		ofxUISlider *slider = (ofxUISlider *) e.widget;
 
-        VS.vBuffer.setFramePos(slider->getScaledValue());
+        VS.vBuffer[VS.currentBufferNum]->setFramePos(slider->getScaledValue());
       //  VS.recordPosition = (int)(slider->getScaledValue()/NUM_FRAMES);
       //  cout<<VS.recordPosition<<endl;
 	}

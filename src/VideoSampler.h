@@ -23,7 +23,7 @@ public:
     // Grabber and Buffer
     ofxPm::VideoGrabber vGrabber;
     //ofVideoGrabber vGrabber;
-    vector <ofxPm::VideoBuffer> vBuffer;
+    vector <ofxPm::VideoBuffer*> vBuffer;
     ofxPm::VideoRate vRate;
 
     int fps;

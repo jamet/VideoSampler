@@ -14,9 +14,13 @@ void VideoSampler::setup(){
         //setup Buffer
         vRate.setup(vGrabber,fps);
         for (int i=0;i<NumBuffer; i++){
-            ofxPm::VideoBuffer sample;
-            sample.setup(vRate,NUM_FRAMES,true);
-            vBuffer.push_back(sample);
+
+            /*ofxPm::VideoBuffer *sample = new ofxPm::VideoBuffer();
+            sample->setup(vRate,NUM_FRAMES,true);
+            vBuffer.push_back(*sample);*/
+            vBuffer.push_back(new ofxPm::VideoBuffer(vRate,NUM_FRAMES));
+           //vBuffer[i]= *sample;
+           //vBuffer.emplace_back(vRate,NUM_FRAMES);
         }
 
 }
@@ -30,16 +34,16 @@ void VideoSampler::draw(){
 
         //draw player videoframe
     for (int i; i<vBuffer.size();i++){
-    if ((vBuffer[i].getVideoFrame(playHead)!= NULL)&&(bPlayBuffer)){
+    if ((vBuffer[i]->getVideoFrame(playHead)!= NULL)&&(bPlayBuffer)){
 
-        vBuffer[i].getVideoFrame((int)playHead).getTextureRef().draw(640 , 160*i, 160, 120);
+        vBuffer[i]->getVideoFrame((int)playHead).getTextureRef().draw(640 , 160*i, 160, 120);
 
     }
     }
 
         //draw head position
     ofDrawBitmapString("FPS: " + ofToString(int(ofGetFrameRate()))
-                       + " || cameraBuffer FPS " + ofToString(vBuffer[0].getRealFPS())
+                       + " || cameraBuffer FPS " + ofToString(vBuffer[0]->getRealFPS())
                        //+ " || videoframes pool size: " + ofToString(VideoFrame::getPoolSize(VideoFormat(640,480,3)))
                        + " || total frames: " +ofToString(NUM_FRAMES),20,ofGetHeight()-40);
 
@@ -54,8 +58,8 @@ void VideoSampler::update(){
 
     if (bRecLiveInput){
 
-        vBuffer[currentBufferNum].resume();
-        vBuffer[currentBufferNum].setFramePos((int)recordPosition);
+        vBuffer[currentBufferNum]->resume();
+        vBuffer[currentBufferNum]->setFramePos((int)recordPosition);
 
             //increment recordPosition
         if (recordPosition<NUM_FRAMES-1){
@@ -73,7 +77,7 @@ void VideoSampler::update(){
     }
     else{
 
-        vBuffer[currentBufferNum].stop();
+        vBuffer[currentBufferNum]->stop();
 
         if (bPlayBuffer){
 
@@ -133,7 +137,7 @@ void VideoSampler::drawPlayerData(float _playheadPerc){
 
     // frame pos
     ofSetColor(0,0,255);
-    framePosPerc = (float)vBuffer[currentBufferNum].getFramePos() / (float)NUM_FRAMES;
+    framePosPerc = (float)vBuffer[currentBufferNum]->getFramePos() / (float)NUM_FRAMES;
     ofLine(left+ (framePosPerc * (waveformWidth-left)), top, left+ (framePosPerc * (waveformWidth-left)), top+waveformHeight);
     ofDrawBitmapString("FramePos", left + framePosPerc * waveformWidth-76, top+45);
 
