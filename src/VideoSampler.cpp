@@ -8,6 +8,7 @@ void VideoSampler::setup(){
         fps=30;
 
         //setup grabber
+        vGrabber.setPixelFormat(OF_PIXELS_I420);
         vGrabber.initGrabber(640,480);
         vGrabber.setVerbose(true);
 
