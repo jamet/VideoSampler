@@ -20,6 +20,9 @@ public:
 
     float getRecordPostion();
     void drawPlayerData(float _playhead);
+    void drawCurrentBuffer(int _x, int _y, int _height, int _width);
+    void drawBuffer(int _x, int _y, int _height, int _width, int _BufferNum);
+
     //PlayModes playModes;
     // Grabber and Buffer
     ofxPm::VideoGrabber vGrabber;

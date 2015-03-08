@@ -22,7 +22,7 @@ void VideoSampler::setup(){
         }
 
 }
-
+//draw function with both grabbers and buffers
 void VideoSampler::draw(){
 
         ofSetColor(255,255,255);
@@ -50,6 +50,21 @@ void VideoSampler::draw(){
 
 }
 
+void VideoSampler::drawCurrentBuffer(int _x, int _y, int _height, int _width){
+    if ((vBuffer[currentBufferNum]->getVideoFrame(playHead)!= NULL)&&(bPlayBuffer[currentBufferNum])){
+
+        vBuffer[currentBufferNum]->getVideoFrame((int)playHead).getTextureRef().draw(_x , _y, _height, _width);
+
+    }
+}
+
+void VideoSampler::drawBuffer(int _x, int _y, int _height, int _width, int _BufferNum){
+    if ((vBuffer[_BufferNum]->getVideoFrame(playHead)!= NULL)&&(bPlayBuffer[_BufferNum])){
+
+        vBuffer[_BufferNum]->getVideoFrame((int)playHead).getTextureRef().draw(_x , _y, _height, _width);
+
+    }
+}
 
 void VideoSampler::update(){
     vGrabber.update();
