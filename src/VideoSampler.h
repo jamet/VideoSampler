@@ -14,6 +14,8 @@ class VideoSampler : public ofBaseApp{
 
 public:
     void setup();
+    //void setup(int _grabberID);
+    void setup(int _grabberID, int _grabberHeight, int _grabberWidth, ofPixelFormat _grabberPixelFormat);
     void update();
     void draw();
 
@@ -26,6 +28,8 @@ public:
     //PlayModes playModes;
     // Grabber and Buffer
     ofxPm::VideoGrabber vGrabber;
+    int GrabberDeviceID;
+    int getGrabberDeviceID ();
     //ofVideoGrabber vGrabber;
     vector <ofxPm::VideoBuffer*> vBuffer ;
     ofxPm::VideoRate vRate;
